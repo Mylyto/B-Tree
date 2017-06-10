@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void inicializaB(TPagina * p){
-  p = NULL;
+void inicializaB(TPagina ** p){
+  *p = NULL;
 }
 void buscaB(TPagina * pag, int mat){
   int i;
@@ -34,15 +34,21 @@ void alturaB(TPagina * pag, int * altura){
 }
 
 void insereB(TPagina * pag, TAluno a) {
-  int pos = 0;
+  int pos = 0, i;
   TAluno meio;
   TPagina * novosFilhos[2*m+1];
-  printf("ENTROU\n");
-  insereB2(pag, a, &meio, pos, novosFilhos);
-  printf("saiu\n");
+  while (i < pag->qtd && a.matricula > pag->vecAluno[i].matricula ) //INSERSÇAO SIMPLES
+    i++;
+    if(a.matricula == pag->vecAluno[i].matricula){
+        printf("Matricula já inserida\n");
+    }else{
+        pag->vecAluno[pag->qtd++] = a;
+          //ORDENAR
+    }
+  //insereB2(pag, a, &meio, pos, novosFilhos);
 }
 
-
+/*
 void insereB2(TPagina * pag, TAluno a, TAluno * meio, int pos, TPagina ** novosFilhos){//Chega ao final da estrutura
   int i = 0, j;
   TAluno vecMeio[2*m+1], vecDir[2*m], vecEsq[2*m];
@@ -154,3 +160,5 @@ void insereB2(TPagina * pag, TAluno a, TAluno * meio, int pos, TPagina ** novosF
     *novosFilhos = vecPag;
   }
 }
+*/
+

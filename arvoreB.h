@@ -12,9 +12,7 @@ typedef struct pag{
   apontador filho[2*m+1];
 }TPagina;
 
-typedef apontador teste;
-
-void inicializaB(TPagina * raiz);
+void inicializaB(TPagina ** raiz);
 void alturaB(TPagina * raiz, int * altura);
 void buscaB(TPagina * raiz, int mat);
 void insereB(TPagina * raiz, TAluno a);
