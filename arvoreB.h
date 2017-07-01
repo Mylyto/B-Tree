@@ -1,3 +1,6 @@
+// Adriano Martins: 2640
+// Antônio Almeida: 2632
+
 #ifndef ARVOREB_H_INCLUDED
 #define ARVOREB_H_INCLUDED
 
@@ -27,6 +30,6 @@ void inserePagina(TPagina ** pag, TAluno a, TPagina ** pagDir);
 void removeB(TPagina ** pag, int mat);
 void rem(TPagina ** pag, int mat, int * diminui);
 void antecessor(TPagina ** pag, int ind, TPagina ** pagPai, int * diminui);
-void recostitui(TPagina ** pag, TPagina ** pagPai, int posPai, int * diminui);
+void reconstitui(TPagina ** pag, TPagina ** pagPai, int posPai, int * diminui);
 
 #endif

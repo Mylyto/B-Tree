@@ -1,6 +1,10 @@
+// Adriano Martins: 2640
+// Antônio Almeida: 2632
+
 #include "aluno.h"
 #include <string.h>
 
+// Função auxiliar que atribui valores para um aluno qualquer
 void insereAluno(TAluno * a, char * n, int m, int n1, int n2, int n3, int nf){
   strcpy(a->nome, n);
   a->matricula = m;

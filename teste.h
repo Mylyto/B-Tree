@@ -1,3 +1,6 @@
+// Adriano Martins: 2640
+// Antônio Almeida: 2632
+
 #ifndef TESTE_H_INCLUDED
 #define TESTE_H_INCLUDED
 

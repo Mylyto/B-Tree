@@ -1,3 +1,6 @@
+// Adriano Martins: 2640
+// Antônio Almeida: 2632
+
 #ifndef  ALUNO_H_INCLUDED
 #define ALUNO_H_INCLUDED
 
