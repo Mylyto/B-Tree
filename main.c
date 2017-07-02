@@ -2,8 +2,8 @@
 // Ant�nio Almeida: 2632
 #include <stdio.h>
 #include <stdlib.h>
-#include "aluno.c"
-#include "arvoreB.c"
+#include "aluno.h"
+#include "arvoreB.h"
 
 int main(int argc, char const *argv[]) {
   //declarado TADS
