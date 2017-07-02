@@ -2,7 +2,7 @@
 // Antônio Almeida: 2632
 
 #include "arvoreB.h"
-#include "teste.c"
+#include "teste.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
