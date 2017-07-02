@@ -1,11 +1,11 @@
 // Adriano Martins: 2640
-// Antônio Almeida: 2632
+// Antï¿½nio Almeida: 2632
 
 #include "teste.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-// Função inicializa os contadores zerando-os
+// Funï¿½ï¿½o inicializa os contadores zerando-os
 void iniTeste(TTeste * t){
   t->altura = 0;
   t->acessoRemocao = 0;
@@ -17,43 +17,28 @@ void iniTeste(TTeste * t){
   t->acessoTotal = 0;
   t->comparacaoTotal = 0;
 }
-
 void resultadoTeste(TTeste t){
 
 }
-
-void alturaTeste(TTeste * t){
-    t->altura++;
+void alturaTeste(TTeste * t, int a){
+  t->altura = a;
 }
-
-void comparacaoRemocao(TTeste * t){
-    t->comparacaoRemocao++;
+void comparacaoRemocao(TTeste * t, int peso){
+    t->comparacaoRemocao = t->comparacaoRemocao + (1*peso);
 }
-
-void comparacaoInsercao(TTeste * t){
-    t->comparacaoInsercao++;
+void comparacaoInsercao(TTeste * t, int peso){
+    t->comparacaoInsercao = t->comparacaoInsercao + (1*peso);
 }
-
-void comparacaoPesquisa(TTeste * t){
-    t->comparacaoPesquisa++;
-}
-
-void comparacaoTotal(TTeste * t){
-    t->comparacaoTotal = t->comparacaoPesquisa + t->comparacaoInsercao + t->comparacaoRemocao;
+void comparacaoPesquisa(TTeste * t, int peso){
+    t->comparacaoPesquisa = t->comparacaoPesquisa + (1*peso);
 }
 
 void acessoRemocao(TTeste * t){
-    t->acessoRemocao++;
+  t->acessoRemocao++;
 }
-
 void acessoInsercao(TTeste * t){
-    t->acessoInsercao++;
+  t->acessoInsercao++;
 }
-
 void acessoPesquisa(TTeste * t){
-    t->acessoPesquisa++;
-}
-
-void acessoTotal(TTeste * t){
-    t->acessoTotal = t->acessoPesquisa + t->acessoInsercao + t->acessoRemocao;
+  t->acessoPesquisa++;
 }
