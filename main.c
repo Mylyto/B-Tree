@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "aluno.h"
 #include "arvoreB.h"
+#include "teste.h"
 
 int main(int argc, char const *argv[]) {
   //declarado TADS
