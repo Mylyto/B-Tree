@@ -1,5 +1,6 @@
 // Adriano Martins: 2640
-// Ant�nio Almeida: 2632
+// Antônio Almeida: 2632
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "aluno.h"
@@ -7,15 +8,15 @@
 #include "teste.h"
 
 int main(int argc, char const *argv[]) {
-  //declarado TADS
+  // Declarado TADS
   TPagina * pagina;
   TAluno aluno;
   TTeste teste;
-  //declarando variáveis auxiliares
+  // Declarando variáveis auxiliares
   int matricula, nota1, nota2, nota3, notaFinal;
   char nome[40];
   int op, flag = 0;
-  //Lista de arquivos
+  // Lista de arquivos
   FILE *itensInsercao, *itensRemocao, *itensBusca, *arqAlunos;
   FILE *arqSaidaI, *arqSaidaR,*arqSaidaB;
 
@@ -27,7 +28,7 @@ int main(int argc, char const *argv[]) {
   arqSaidaR = fopen("saidaRemocao.txt", "w");
   arqSaidaB = fopen("saidaBusca.txt", "w");
 
-  //Iniciando TADS
+  // Iniciando TADS
   iniTeste(&teste);
   Inicializa(&pagina);
 
@@ -37,16 +38,16 @@ int main(int argc, char const *argv[]) {
     return 0;
   }
 
-  //Lendo 10K de alunos e os inserindo para criar a árvore inicial
+  // Lendo 10K de alunos e os inserindo para criar a árvore inicial
   while (fscanf(arqAlunos, "%d %s %d %d %d %d", &matricula, nome, &nota1, &nota2, &nota3, &notaFinal) != EOF) {
     insereAluno(&aluno, nome, matricula, nota1, nota2, nota3, notaFinal);
     Insere(aluno, &pagina, &teste);
   }
   Testa(pagina);
 
-  //inserindo 100 alunos para teste
+  // Inserindo 100 alunos para teste
   while (fscanf(itensInsercao, "%d %s %d %d %d %d", &matricula, nome, &nota1, &nota2, &nota3, &notaFinal) != EOF) {
-    //Zerando o contador de acesso e comparações
+    // Zerando o contador de acesso e comparações
     iniTeste(&teste);
     insereAluno(&aluno, nome, matricula, nota1, nota2, nota3, notaFinal);
     Insere(aluno, &pagina,&teste);
@@ -55,9 +56,9 @@ int main(int argc, char const *argv[]) {
   }
   Testa(pagina);
 
-  //Pesquisando 100 alunos para teste
+  // Pesquisando 100 alunos para teste
   while (fscanf(itensBusca, "%d %s %d %d %d %d", &matricula, nome, &nota1, &nota2, &nota3, &notaFinal) != EOF) {
-    //Zerando o contador de acesso e comparações
+    // Zerando o contador de acesso e comparações
     iniTeste(&teste);
     Pesquisa(matricula, pagina,&teste);
     alturaB(&pagina, &teste);
@@ -65,9 +66,9 @@ int main(int argc, char const *argv[]) {
   }
   Testa(pagina);
 
-  //removendo 100 alunos para teste
- while (fscanf(itensRemocao, "%d %s %d %d %d %d", &matricula, nome, &nota1, &nota2, &nota3, &notaFinal) != EOF) {
-   //Zerando o contador de acesso e comparações
+  // Removendo 100 alunos para teste
+  while (fscanf(itensRemocao, "%d %s %d %d %d %d", &matricula, nome, &nota1, &nota2, &nota3, &notaFinal) != EOF) {
+    // Zerando o contador de acesso e comparações
     iniTeste(&teste);
     Retira(matricula,&pagina, &teste);
     alturaB(&pagina, &teste);
@@ -78,7 +79,8 @@ int main(int argc, char const *argv[]) {
   system("cls");
   system("clear");
   printf("TESTES FINALIZADOS, RESULTADOS COM M VIGENTE NOS ARQUIVOS DE SAIDA\n");
-  printf("\nINSERÇAO, REMOÇAO E BUSCA MANUAIS \n");
+  printf("\nINSERCAO, REMOCAO E BUSCA MANUAIS \n");
+  // Menu para operações manuais na estrutura
   while (1) {
     printf("\n1-INSERIR 2-REMOVER 3-BUSCAR 0-SAIR\n");
     scanf("%d", &op);
@@ -112,17 +114,18 @@ int main(int argc, char const *argv[]) {
         Pesquisa(matricula, pagina, &teste);
         break;
       case 4:
+        // Operação extra (oculta no menu) que faz a impressão dos registros da árvore
         Imprime(pagina);
         break;
       case 0:
         flag = 1;
         break;
-      default: printf("VALOR INVÁLIDO, TENTE NOVAMENTE\n");op=0;
+      default: printf("VALOR INVALIDO, TENTE NOVAMENTE\n");op=0;
     }
     if(!flag){
 
     }else{
-        //fechando arquivos
+        // Fechando arquivos
         fclose(itensBusca);
         fclose(itensInsercao);
         fclose(itensRemocao);

@@ -21,7 +21,7 @@ void alturaB(TPagina ** raiz, TTeste * t){
 // Função auxiliar que percorre a árvore incrementando a altura
 void alt(TPagina ** pag, int * altura, TTeste * t){
   if((*pag) == NULL){// Se a página atual for nula, decrementa 1
-    *altura= *altura -1;
+    *altura = *altura -1;
     return;
   }else{/// Enquanto não for nula, percorre sub-árvore à esquerda incrementando a altura
     *altura= *altura + 1;
@@ -29,19 +29,20 @@ void alt(TPagina ** pag, int * altura, TTeste * t){
     return;
   }
 }
-
+// Pesquisa por um aluno que foi cadastrado através da chave (matrícula)
 void Pesquisa(int mat, TPagina * ap, TTeste * t){
   TAluno a;
+
   Pesquisa_(mat,&a,ap,t);
-  if(a.matricula==-1)
-    printf("MATRICULA NÃO ENCONTRADA\n");
+  if(a.matricula == -1)
+    printf("MATRICULA NAO ENCONTRADA\n");
   else
     printf("ALUNO: %s MATRICULA: %d NOTA FINAL: %d\n", a.nome, a.matricula, a.notaF);
 }
-
-// Pesquisa por um aluno que foi cadastrado através da chave (matrícula)
+// Função auxiliar que percorre por toda a árvore em busca da matrícula informada
 void Pesquisa_(int mat, TAluno *x, TPagina * ap, TTeste * t){
   long i = 1;// Contador usado para percorrer árvore de acordo com a chave à ser procurada
+
   if (ap == NULL){// Caso ainda não tenha encontrado e o próximo apontador seja nulo
     x->matricula = -1;
     return;
@@ -68,17 +69,17 @@ void Pesquisa_(int mat, TAluno *x, TPagina * ap, TTeste * t){
 }
 // Função responsável por inserir registro na página e mantê-la ordenada
 void InsereNapagina(TPagina * ap,TAluno aluno, TPagina * apDir, TTeste * t){
-
   short naoAchouPosicao;
   int k;
+
   k = ap->qtd;
   naoAchouPosicao = (k > 0);
     // Percorre de trás para frente, quando a chave da posição atual for menor é feita a inserção
   while (naoAchouPosicao){
     comparacaoRemocao(t,1);
     comparacaoInsercao(t,1);
+    // Verifica se a posição foi encontrada
     if (aluno.matricula >= ap->vecAluno[k-1].matricula){
-      // Verifica se a posição foi encontrada
         naoAchouPosicao = FALSE;
         break;
       }
@@ -97,6 +98,7 @@ void Ins(TAluno aluno, TPagina * ap, short *Cresceu, TAluno *alunoRetorno,  TPag
   long i = 1;// Contador é declarado e utilizado para identificar ponto de inserção na página
   long j;
   TPagina * apTemp;
+
   if (ap == NULL){
     *Cresceu = TRUE; (*alunoRetorno) = aluno; (*apRetorno) = NULL;
     return;
@@ -147,6 +149,7 @@ void Insere(TAluno aluno, TPagina * *ap, TTeste * t){
   short Cresceu;// Flag para sinalizar crescimento vertical da árvore
   TAluno alunoRetorno;
   TPagina *apRetorno, *apTemp;
+
   Ins(aluno, *ap, &Cresceu, &alunoRetorno, &apRetorno,t);
   if (Cresceu){// Verifica se a àrvore cresceu para cima
     apTemp = (TPagina *)malloc(sizeof(TPagina));// Aloca página temporária
@@ -161,17 +164,23 @@ void Insere(TAluno aluno, TPagina * *ap, TTeste * t){
 }
 // Auxilia na remoção reorganizando a àrvore de forma que suas propriedades sejam mantidas
 void Reconstitui(TPagina * apPag, TPagina * apPai, int PosPai, short *Diminuiu, TTeste * t){
-  TPagina *Aux;  long DispAux, j;
+  TPagina *Aux;
+  long DispAux, j;
+
   if (PosPai < apPai->qtd){
-    Aux = apPai->vecFilho[PosPai+1];  DispAux = (Aux->qtd - M + 1) / 2;
+    Aux = apPai->vecFilho[PosPai+1];
+    DispAux = (Aux->qtd - M + 1) / 2;
     apPag->vecAluno[apPag->qtd] = apPai->vecAluno[PosPai];
-    apPag->vecFilho[apPag->qtd + 1] = Aux->vecFilho[0];  apPag->qtd++;
+    apPag->vecFilho[apPag->qtd + 1] = Aux->vecFilho[0];
+    apPag->qtd++;
     if (DispAux > 0){
       for (j = 1; j < DispAux; j++)
         InsereNapagina(apPag, Aux->vecAluno[j-1], Aux->vecFilho[j],t);
       apPai->vecAluno[PosPai] = Aux->vecAluno[DispAux-1];  Aux->qtd -= DispAux;
-      for (j = 0; j < Aux->qtd; j++) Aux->vecAluno[j] = Aux->vecAluno[j + DispAux];
-      for (j = 0; j <= Aux->qtd; j++) Aux->vecFilho[j] = Aux->vecFilho[j + DispAux];
+      for (j = 0; j < Aux->qtd; j++)
+        Aux->vecAluno[j] = Aux->vecAluno[j + DispAux];
+      for (j = 0; j <= Aux->qtd; j++)
+        Aux->vecFilho[j] = Aux->vecFilho[j + DispAux];
       *Diminuiu = FALSE;
     }else {
       for (j = 1; j <= M; j++)
@@ -185,7 +194,8 @@ void Reconstitui(TPagina * apPag, TPagina * apPai, int PosPai, short *Diminuiu, 
         if (apPai->qtd >= M) *Diminuiu = FALSE;
       }
   } else {
-    Aux = apPai->vecFilho[PosPai-1]; DispAux = (Aux->qtd - M + 1) / 2;
+    Aux = apPai->vecFilho[PosPai-1];
+    DispAux = (Aux->qtd - M + 1) / 2;
     for (j = apPag->qtd; j >= 1; j--)
       apPag->vecAluno[j] = apPag->vecAluno[j-1];
     apPag->vecAluno[0] = apPai->vecAluno[PosPai-1];
@@ -197,13 +207,15 @@ void Reconstitui(TPagina * apPag, TPagina * apPai, int PosPai, short *Diminuiu, 
           InsereNapagina(apPag, Aux->vecAluno[Aux->qtd - j],Aux->vecFilho[Aux->qtd - j + 1],t);
         apPag->vecFilho[0] = Aux->vecFilho[Aux->qtd - DispAux + 1];
         apPai->vecAluno[PosPai-1] = Aux->vecAluno[Aux->qtd - DispAux];
-        Aux->qtd -= DispAux;  *Diminuiu = FALSE;
+        Aux->qtd -= DispAux;
+        *Diminuiu = FALSE;
       }else{
         for (j = 1; j <= M; j++)
             InsereNapagina(Aux, apPag->vecAluno[j-1], apPag->vecFilho[j],t);
         free(apPag);
         apPai->qtd--;
-        if (apPai->qtd >= M)  *Diminuiu = FALSE;
+        if (apPai->qtd >= M)
+            *Diminuiu = FALSE;
         }
     }
 }
@@ -224,6 +236,7 @@ void Antecessor(TPagina * ap, int Ind,TPagina * apPai, short *Diminuiu, TTeste *
 void Ret(int Ch, TPagina ** ap, short *Diminuiu, TTeste * t){
   long j, Ind = 1;
   TPagina * Pag;// Árvore auxiliar utilizada como cópia para percorrer
+
   if (*ap == NULL){// Chegou ao fim sem encontrar ou a árvore está vazia
     printf("MATRICULA NAO ENCONTRADA\n"); *Diminuiu = FALSE;
     return;
@@ -244,7 +257,7 @@ void Ret(int Ch, TPagina ** ap, short *Diminuiu, TTeste * t){
       }
       return;
     }
-    /* TPagina nao e folha: trocar com antecessor */
+    /* TPagina não e folha: trocar com antecessor */
     acessoRemocao(t);
     Antecessor(*ap, Ind, Pag->vecFilho[Ind-1], Diminuiu,t);// Se não for folha movimenta o antecessor
     if (*Diminuiu)
@@ -263,6 +276,7 @@ void Ret(int Ch, TPagina ** ap, short *Diminuiu, TTeste * t){
 void Retira(int Ch, TPagina * *ap, TTeste * t){
   short Diminuiu;
   TPagina * Aux;
+
   Ret(Ch, ap, &Diminuiu,t);
   if (Diminuiu && (*ap)->qtd == 0){// Verifica se a página ficou vazia e libera memória
     Aux = *ap;
@@ -271,16 +285,12 @@ void Retira(int Ch, TPagina * *ap, TTeste * t){
     free(Aux);
   }
 }
-
-
-
-
-
-
-
+// Função auxiliar que percorre a árvore exibindo todos os registros
 void ImprimeI(TPagina * p, int nivel){
   long i;
-  if (p == NULL) return;
+
+  if (p == NULL)
+    return;
   printf("Nivel %d : ", nivel);
   for (i = 0; i < p->qtd; i++)
     printf("%ld ",(long)p->vecAluno[i].matricula);
@@ -289,14 +299,16 @@ void ImprimeI(TPagina * p, int nivel){
   for (i = 0; i <= p->qtd; i++)
     ImprimeI(p->vecFilho[i], nivel);
 }
-
+// Função responsável por exibir os registros contidos na estrutura
 void Imprime(TPagina * p){
-  int  n = 0; ImprimeI(p, n);
+  int  n = 0;
+  ImprimeI(p, n);
 }
 
 void TestaI(TPagina * p, int pai, short direita){
   int i;
   int antecessor = 0;
+
   if (p == NULL) return;
   if (p->vecAluno[0].matricula > pai && direita == FALSE){
     printf("Erro: filho %d maior que pai %d\n", p->vecAluno[0].matricula, pai);
@@ -317,7 +329,9 @@ void TestaI(TPagina * p, int pai, short direita){
 
 void Testa(TPagina * p){
   int i;
-  if (p == NULL) return;
+
+  if (p == NULL)
+    return;
   for (i = 0; i < p->qtd; i++)
     TestaI(p->vecFilho[i], p->vecAluno[i].matricula, FALSE);
   TestaI(p->vecFilho[p->qtd], p->vecAluno[i].matricula, TRUE);

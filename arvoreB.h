@@ -1,5 +1,5 @@
 // Adriano Martins: 2640
-// Ant�nio Almeida: 2632
+// Antônio Almeida: 2632
 
 #ifndef ARVOREB_H_INCLUDED
 #define ARVOREB_H_INCLUDED
@@ -20,7 +20,7 @@ typedef struct pag{
 }TPagina;
 
 void Inicializa(TPagina ** pag);
-void altura(TPagina ** raiz, TTeste * t);
+void alturaB(TPagina ** raiz, TTeste * t);
 void alt(TPagina ** pag, int * altura, TTeste * t);
 void Pesquisa(int mat, TPagina * ap, TTeste * t);
 void Pesquisa_(int mat, TAluno * aluno, TPagina * ap, TTeste * t);
@@ -33,4 +33,10 @@ void Reconstitui(TPagina * apPag, TPagina * apPai,int PosPai, short *Diminuiu, T
 void Antecessor(TPagina * ap, int Ind,TPagina * apPai, short *Diminuiu, TTeste * t);
 void Ret(int Ch, TPagina * *ap, short *Diminuiu, TTeste * t);
 void Retira(int Ch, TPagina ** ap, TTeste * t);
+
+void ImprimeI(TPagina * p, int nivel);
+void Imprime(TPagina * p);
+void TestaI(TPagina * p, int pai, short direita);
+void Testa(TPagina * p);
+
 #endif
